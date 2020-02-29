@@ -21,10 +21,6 @@ function draw(){
             campo[i][j].display();
         }
     }
-
-    if(vittoria){
-        background(204, 255, 153, 50);
-    }
 }
 
 function creaCampo(){
@@ -71,12 +67,16 @@ function mousePressed(){
 
 function controllaVittoria(riga, colonna){
     if(campo[riga][0].occupato==turno && campo[riga][1].occupato==turno && campo[riga][2].occupato==turno){
+        line(0, riga*(dimCaselle)+(dimCaselle/2), dimCaselle*3, riga*(dimCaselle)+(dimCaselle/2));
         return true;
     } else if(campo[0][colonna].occupato==turno && campo[1][colonna].occupato==turno && campo[2][colonna].occupato==turno){
+        line(colonna*(dimCaselle)+(dimCaselle/2), 0, colonna*(dimCaselle)+(dimCaselle/2), dimCaselle*3);
         return true;
     } else if(campo[0][0].occupato==turno && campo[1][1].occupato==turno && campo[2][2].occupato==turno){
+        line(0, 0, dimCaselle*3, dimCaselle*3);
         return true;
     } else if(campo[0][2].occupato==turno && campo[1][1].occupato==turno && campo[2][0].occupato==turno){
+        line(dimCaselle*3, 0, 0, dimCaselle*3);
         return true;
     }
 }
