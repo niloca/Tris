@@ -4,18 +4,21 @@ var nColonne=3;
 var campo=[];
 var vittoria=false;
 var turno="giocatore1";
+var bottone;
 
 function setup(){
-    createCanvas(dimCaselle*3, dimCaselle*3);
+    createCanvas(dimCaselle*3, dimCaselle*3.5);
+    
+    bottone = createButton('restart');
+    bottone.position(dimCaselle*1.075, dimCaselle*3.25);
+    bottone.size(dimCaselle);
+    bottone.mousePressed(setup);
+    
     creaCampo();
 }
 
 function draw(){    
-    line(dimCaselle, 0, dimCaselle, dimCaselle*nRighe);
-    line(dimCaselle*2, 0, dimCaselle*2, dimCaselle*nRighe);
-    line(0, dimCaselle, dimCaselle*nColonne, dimCaselle);
-    line(0, dimCaselle*2, dimCaselle*nColonne, dimCaselle*2);
-
+    noFill();
     for(var i=0; i<nRighe; i++){
         for(var j=0; j<nColonne; j++){
             campo[i][j].display();
@@ -24,6 +27,11 @@ function draw(){
 }
 
 function creaCampo(){
+    line(dimCaselle, 0, dimCaselle, dimCaselle*nRighe);
+    line(dimCaselle*2, 0, dimCaselle*2, dimCaselle*nRighe);
+    line(0, dimCaselle, dimCaselle*nColonne, dimCaselle);
+    line(0, dimCaselle*2, dimCaselle*nColonne, dimCaselle*2);
+
     for(var i=0; i<nRighe; i++){
         campo[i]=[];
         for(var j=0; j<nColonne; j++){
