@@ -2,14 +2,22 @@ var dimCaselle=100;
 var nRighe=3;
 var nColonne=3;
 var campo=[];
-var vittoria=false;
-var turno="giocatore1";
+var vittoria;
+var turno;
+var canvas;
+var contenitoreCampo;
+var testo;
 var bottone;
 
 function setup(){
-    createCanvas(dimCaselle*3, dimCaselle*3.5);
-    
-    bottone = createButton('restart');
+    canvas=createCanvas(dimCaselle*3, dimCaselle*3.5);
+    contenitoreCampo=select(".contenitoreCampo");
+    canvas.parent(contenitoreCampo);
+
+    vittoria=false;
+    turno="giocatore1";
+
+    bottone = createButton("restart");
     bottone.position(dimCaselle*1.075, dimCaselle*3.25);
     bottone.size(dimCaselle);
     bottone.mousePressed(setup);
@@ -17,12 +25,18 @@ function setup(){
     creaCampo();
 }
 
-function draw(){    
+function draw(){
     noFill();
     for(var i=0; i<nRighe; i++){
         for(var j=0; j<nColonne; j++){
             campo[i][j].display();
         }
+    }
+    testo=select(".contenitoreTesto");
+    if(!vittoria){
+        testo.html("turno di: "+turno);
+    } else{
+        testo.html("vince "+turno);
     }
 }
 
@@ -63,10 +77,12 @@ function mousePressed(){
             if(!vittoria && campo[i][j].occupato==false && mouseX>campo[i][j].x && mouseX<campo[i][j].x+dimCaselle && mouseY>campo[i][j].y && mouseY<campo[i][j].y+dimCaselle){
                 campo[i][j].occupato=turno;
                 vittoria=controllaVittoria(i, j);
-                if(turno=="giocatore1"){
-                    turno="giocatore2";
-                } else{
-                    turno="giocatore1";
+                if(!vittoria){
+                    if(turno=="giocatore1"){
+                        turno="giocatore2";
+                    } else{
+                        turno="giocatore1";
+                    }
                 }
             }
         }
