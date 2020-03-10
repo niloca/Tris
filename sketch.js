@@ -14,6 +14,10 @@ function setup(){
     contenitoreCampo=select(".contenitoreCampo");
     canvas.parent(contenitoreCampo);
 
+    angleMode(DEGREES);
+
+    frameRate(60);
+
     vittoria=false;
     turno="giocatore1";
 
@@ -29,7 +33,7 @@ function draw(){
     noFill();
     for(var i=0; i<nRighe; i++){
         for(var j=0; j<nColonne; j++){
-            campo[i][j].display();
+            campo[i][j].show();
         }
     }
     testo=select(".contenitoreTesto");
@@ -59,14 +63,22 @@ class casella{
         this.x=x;
         this.y=y;
         this.occupato=false;
+        this.movimentoLinea=dimCaselle*0.20;
+        this.movimentoCerchio=0;
     }
 
-    display(){
+    show(){
         if(this.occupato=="giocatore1"){
-            line(this.x, this.y, this.x+dimCaselle, this.y+dimCaselle);
-            line(this.x+dimCaselle, this.y, this.x, this.y+dimCaselle);
+            point(this.x+this.movimentoLinea, this.y+this.movimentoLinea);
+            point(this.x+dimCaselle-this.movimentoLinea, this.y+this.movimentoLinea);
+            if(this.movimentoLinea<=dimCaselle-dimCaselle*0.20){
+                this.movimentoLinea++;
+            }
         } else if(this.occupato=="giocatore2"){
-            circle(this.x+(dimCaselle/2), this.y+(dimCaselle/2), dimCaselle);
+            point(this.x+dimCaselle/2+cos(this.movimentoCerchio)*dimCaselle*0.35, this.y+dimCaselle/2+sin(this.movimentoCerchio)*dimCaselle*0.35);
+            if(this.movimentoCerchio<=360){
+                this.movimentoCerchio+=1;
+            }
         }
     }
 }
