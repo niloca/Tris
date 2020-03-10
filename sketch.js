@@ -19,12 +19,9 @@ function setup(){
 
     frameRate(60);
 
-    vittoria=false;
-    turno="giocatore1";
-
     contenitoreBottone=select(".contenitoreBottone");
     bottone = createButton("restart");
-    bottone.mousePressed(setup);
+    bottone.mousePressed(creaCampo);
     bottone.parent(contenitoreBottone);
     
     creaCampo();
@@ -46,6 +43,13 @@ function draw(){
 }
 
 function creaCampo(){
+    vittoria=false;
+    turno="giocatore1";
+
+    campo=[];
+
+    background(255);
+
     line(dimCaselle, 0, dimCaselle, dimCaselle*nRighe);
     line(dimCaselle*2, 0, dimCaselle*2, dimCaselle*nRighe);
     line(0, dimCaselle, dimCaselle*nColonne, dimCaselle);
