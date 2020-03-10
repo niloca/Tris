@@ -6,6 +6,7 @@ var vittoria;
 var turno;
 var canvas;
 var contenitoreCampo;
+var contenitoreBottone;
 var testo;
 var bottone;
 
@@ -21,10 +22,10 @@ function setup(){
     vittoria=false;
     turno="giocatore1";
 
+    contenitoreBottone=select(".contenitoreBottone");
     bottone = createButton("restart");
-    bottone.position(dimCaselle*1.075, dimCaselle*3.25);
-    bottone.size(dimCaselle);
     bottone.mousePressed(setup);
+    bottone.parent(contenitoreBottone);
     
     creaCampo();
 }
