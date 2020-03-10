@@ -28,7 +28,6 @@ function setup(){
 }
 
 function draw(){
-    noFill();
     for(var i=0; i<nRighe; i++){
         for(var j=0; j<nColonne; j++){
             campo[i][j].show();
@@ -69,20 +68,22 @@ class casella{
         this.y=y;
         this.occupato=false;
         this.movimentoLinea=dimCaselle*0.20;
-        this.movimentoCerchio=0;
+        this.movimentoCerchio=270;
     }
 
     show(){
         if(this.occupato=="giocatore1"){
+            strokeWeight(3);
             point(this.x+this.movimentoLinea, this.y+this.movimentoLinea);
             point(this.x+dimCaselle-this.movimentoLinea, this.y+this.movimentoLinea);
             if(this.movimentoLinea<=dimCaselle-dimCaselle*0.20){
                 this.movimentoLinea++;
             }
+            strokeWeight(2);
         } else if(this.occupato=="giocatore2"){
-            point(this.x+dimCaselle/2+cos(this.movimentoCerchio)*dimCaselle*0.35, this.y+dimCaselle/2+sin(this.movimentoCerchio)*dimCaselle*0.35);
-            if(this.movimentoCerchio<=360){
-                this.movimentoCerchio+=1;
+            circle(this.x+dimCaselle/2+(dimCaselle*0.35)*cos(this.movimentoCerchio), this.y+dimCaselle/2+(dimCaselle*0.35)*sin(this.movimentoCerchio), 2);
+            if(this.movimentoCerchio<270+360){
+                this.movimentoCerchio+=4;
             }
         }
     }
